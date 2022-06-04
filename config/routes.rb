@@ -7,6 +7,9 @@
 # Visit http://www.pragmaticprogrammer.com/titles/rails6 for more book information.
 #---
 Rails.application.routes.draw do
+  # All default routes for Products
   resources :products
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  # Routes for Store
+  root 'store#index', as: 'store_index'
+  
 end
