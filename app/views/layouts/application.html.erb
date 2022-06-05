@@ -3,12 +3,10 @@
   <head>
     <title>Pragprog Books Online Store</title>
     <%= csrf_meta_tags %>
-
     <%= stylesheet_link_tag 'application', media: 'all',
                             'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
   <body>
     <header class="main">
       <%= image_tag 'logo.svg', alt: 'The Pragmatic Bookshelf' %>
@@ -22,6 +20,9 @@
           <li><a href="/news">News</a></li>
           <li><a href="/contact">Contact</a></li>
         </ul>
+        <article class="date_and_time">
+          <%= @date_and_time %>
+        </article>
       </nav>
       <main class='<%= controller.controller_name %>'>
         <%= yield %>
