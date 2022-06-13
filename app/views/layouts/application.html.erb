@@ -20,9 +20,16 @@
           <li><a href="/news">News</a></li>
           <li><a href="/contact">Contact</a></li>
         </ul>
-        <article class="date_and_time">
-          <%= @date_and_time %>
-        </article>
+        <% if @date_and_time %>
+          <article class="date_and_time">
+            <%= @date_and_time %>
+          </article>
+          <% if session[:counter] > 5 %>
+            <article class="session_count">
+              Session count: <%= session[:counter] %>
+            </article>
+          <% end %>
+        <% end %>
       </nav>
       <main class='<%= controller.controller_name %>'>
         <%= yield %>
