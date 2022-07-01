@@ -15,7 +15,7 @@
           <div class="price">
             <%= number_to_currency(product.price) %>
             <%# <%= number_to_currency(product.price, unit: "AR$") %>
-            <%= button_to 'Add to cart', line_items_path(product_id: product), remote: true %>
+            <%= button_to 'Add to Cart', line_items_path(product_id: product), remote: true %>
           </div>
         </li>
       <% end %>

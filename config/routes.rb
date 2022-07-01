@@ -7,11 +7,14 @@
 # Visit http://www.pragmaticprogrammer.com/titles/rails6 for more book information.
 #---
 Rails.application.routes.draw do
+  resources :orders
   resources :line_items
   resources :carts
   # All default routes for Products
   resources :products
   # Routes for Store
   root 'store#index', as: 'store_index'
-  
+  resources :products do
+    get :who_bought, on: :member
+  end
 end
