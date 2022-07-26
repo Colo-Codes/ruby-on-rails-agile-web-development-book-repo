@@ -7,4 +7,4 @@ test:
 production:
   adapter: redis
   url: <%= ENV.fetch("REDIS_URL") { "redis://localhost:6379/1" } %>
-  channel_prefix: ruby_on_rails_agile_web_development_book_repo_production
+  channel_prefix: depot_production

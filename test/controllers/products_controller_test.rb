@@ -15,7 +15,6 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
 
   end
 
-  
   test "should get index" do
     get products_url
     assert_response :success
@@ -25,7 +24,6 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
     get new_product_url
     assert_response :success
   end
-
   
   test "should create product" do
     assert_difference('Product.count') do
@@ -44,7 +42,6 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to product_url(Product.last)
   end
 
-  
   test "should show product" do
     get product_url(@product)
     assert_response :success
@@ -54,10 +51,8 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
     get edit_product_url(@product)
     assert_response :success
   end
-
   
   test "should update product" do
-    
     patch product_url(@product), params: { 
         product: { 
           description: @product.description, 
@@ -66,10 +61,17 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
           title: @title,
         }
       }
-    
+
     assert_redirected_to product_url(@product)
   end
 
+  test "can't delete product in cart" do
+    assert_difference('Product.count', 0) do
+      delete product_url(products(:two))
+    end
+
+    assert_redirected_to products_url
+  end
   
   test "should destroy product" do
     assert_difference('Product.count', -1) do
