@@ -7,6 +7,9 @@
 # Visit http://www.pragmaticprogrammer.com/titles/rails6 for more book information.
 #---
 Rails.application.configure do
+  # Prepare the ingress controller used to receive mail
+  config.action_mailbox.ingress = :relay
+
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.

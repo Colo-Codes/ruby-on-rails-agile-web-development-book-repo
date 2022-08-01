@@ -18,6 +18,24 @@ module Depot
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
 
+    # monkey patching to resolve the issue of action mailbox inbound email sending empty attachment
+    config.to_prepare do
+      Rails::Conductor::ActionMailbox::InboundEmailsController.class_eval do
+        private
+
+        def new_mail
+          Mail.new(params.permit!.except(:attachments).to_h).tap do |mail|
+            mail[:bcc]&.include_in_headers = true
+            noBlankParams = params[:attachments].to_a.reject { |p| p.blank? }
+            p ">>> noBlankParams: #{noBlankParams}"
+            noBlankParams.each do |attachment|
+              mail.add_file(filename: attachment.original_filename, content: attachment.read) if !attachment.blank?
+            end
+          end
+        end
+      end
+    end
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
